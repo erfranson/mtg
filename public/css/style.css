@@ -1,0 +1,15 @@
+.container-fluid{
+	padding-right: 0;
+	padding-left: 0;
+}
+.jumbotron{
+	margin-top: 50px;
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+.tab-pane{
+	padding: 15px;
+}
+.card-submit{
+	margin-top: 10px;
+}
