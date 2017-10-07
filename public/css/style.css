@@ -13,6 +13,12 @@ ul.nav.nav-tabs{
 	background-color: #2d2d2d;
 	color: #ffffff;
 }
+.nav-tabs>li>a{
+	color: #ffffff;
+}
+.nav>li>a:focus, .nav>li>a:hover{
+	background-color: #999;
+}
 .tab-content{
 	background-color:#2d2d2d;
 	color: #ffffff;
@@ -26,15 +32,15 @@ ul.nav.nav-tabs{
 	margin-top: 50px;
 	padding-top: 0px;
 	padding-bottom: 0px;
-	padding-right: 0px;
-	padding-left: 0px;
 	margin-bottom: 0px;
 	background: url(../images/poncho.jpg);
+
 
 }
 .container .jumbotron, .container-fluid .jumbotron{
 	padding-right: 0px;
 	padding-left: 0px;
+	border-radius: 0;
 }
 .tab-pane{
 	padding: 15px;
