@@ -1,6 +1,7 @@
 // Dependencies
 // =============================================================
 var db = require("../db");
+var lib = require("../lib");
 
 // Routes
 // =============================================================
@@ -14,6 +15,11 @@ module.exports = function (app) {
          res.json(dbPost);
       });
    });
+
+   // POST route for SEARCH and getting SPECIFIC cards
+   app.post("/api/posts", function (req, res) {
+      db.Post.
+   })
 
 
 };
