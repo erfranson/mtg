@@ -1,7 +1,28 @@
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 60px;
+}
+
+/*NAVIGATION*/
+.navbar-inverse .navbar-brand{
+	font-family: 'Modak', cursive;
+	font-size: 25px;
+	color: #ffffff;
+}
 .navbar-header{
 	padding-left: 15px;
 
 }
+/*.navbar {
+   background-color: transparent;
+   background: transparent;
+   border-color: transparent;
+}*/
+.navbar li { color: #000 } 
 ul.nav.navbar-nav.navbar-right{
 	padding-right: 15px;
 }
@@ -12,6 +33,10 @@ ul.nav.navbar-nav.navbar-right{
 ul.nav.nav-tabs{
 	background-color: #2d2d2d;
 	color: #ffffff;
+}
+.nav-tabs>li{
+	width: 33%;
+	text-align: center;
 }
 .nav-tabs>li>a{
 	color: #ffffff;
@@ -29,14 +54,22 @@ ul.nav.nav-tabs{
 	padding-left: 0;
 }
 .jumbotron{
-	margin-top: 50px;
 	padding-top: 0px;
 	padding-bottom: 0px;
 	margin-bottom: 0px;
-	background: url(../images/poncho.jpg);
-
-
+	background: url(../images/black_lotus.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	min-height: 500px;
+	color: #ffffff;
+	font-family: 'Pathway Gothic One', sans-serif;
 }
+
+.banner-heading{
+	padding:150px;
+	text-align: center;
+}
+
 .container .jumbotron, .container-fluid .jumbotron{
 	padding-right: 0px;
 	padding-left: 0px;
@@ -48,9 +81,15 @@ ul.nav.nav-tabs{
 .card-submit{
 	margin-top: 10px;
 }
-.left-ban{
-	height: 350px;
+#info{
+	min-height: 350px;
 }
-.right-ban{
-	height: 350px;
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set  fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
 }
