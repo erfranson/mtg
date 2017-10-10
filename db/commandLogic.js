@@ -1,202 +1,236 @@
-/*
-* Steps the logic needs to accomplish:
-*
-* 1) Check whether the set is premium or not (this will be hard)
-* 2) Based on that either run stats for a premium or standard set (36 or 24 packs)
-* 3) Be able to randomize if rare or mythic
-* 4) Be able to randomize from rare or mythic pool based on that
-* 5) Be able to push the selected card object to an array
-* 6) Prepend a div on the page containing that card's info
-* 7) Run that process the required number of times
-*
-* Other ToDos:
-*
-* 2) figure out URL parsing
-* 3) figure out scraping with curl and cheerio.js
-* */
-
-
-// //Use linked scraper and cheeriojs for gathering info
-// https://nodejs.org/docs/v0.5.2/api/http.html#http.request
-//
-// https://cheerio.js.org/
-
-
-//Dependencies
-var inquire = require("inquirer");
-
-//Global Variables
-var rare = [
-    { name: "Wasteland", price: 27.94},
-    { name: "Sylvan Library", price: 15.73},
-    { name: "Sensei's Divining Top", price: 14.24},
-    { name: "Entomb", price: 12.07},
-    { name: "Enlightened Tutor", price: 11.68},
-    { name: "Maze of Ith", price: 9.49},
-    { name: "Toxic Deluge", price: 8.00},
-    { name: "Mystical Tutor", price: 6.41},
-    { name: "Wrath of God", price: 6.14},
-    { name: "Gamble", price: 6.00},
-    { name: "Vindicate", price: 5.69},
-    { name: "Green Sun's Zenith", price: 5.69},
-    { name: "Sinkhole", price: 4.67},
-    { name: "Deathrite Shaman", price: 4.54},
-    { name: "Heritage Druid", price: 4.42},
-    { name: "Winter Orb", price: 3.61},
-    { name: "Shardless Agent", price: 3.60},
-    { name: "Duplicant", price: 3.47},
-    { name: "Isochron Scepter", price: 3.37},
-    { name: "Baleful Strix", price: 2.99},
-    { name: "Mother of Runes", price: 2.34},
-    { name: "Karmic Guide", price: 2.24},
-    { name: "Regal Force", price:2.02},
-    { name: "Siege-Gang Commander", price: 1.67},
-    { name: "Imperious Perfect", price: 1.55},
-    { name: "Eight-and-a-Half-Tails", price: 1.41},
-    { name: "Arcanis the Omnipotent", price: 1.30},
-    { name: "Nevinyrral's Disk", price: 1.24},
-    { name: "Goblin Charbelcher", price: 1.19},
-    { name: "Brago, King Eternal", price: 1.17},
-    { name: "Ichorid", price: 1.16},
-    { name: "Visara the Dreadful", price: 1.00},
-    { name: "Malicious Affliction", price: 0.00},
-    { name: "Unexpectedly Absent", price: 0.00},
-    { name: "Dualcaster Mage", price: 0.00},
-    { name: "Xantid Swarm", price: 0.00},
-    { name: "Sulfuric Vortex", price: 0.00},
-    { name: "Control Magic", price: 0.00},
-    { name: "Inkwell Leviathan", price: 0.00},
-    { name: "Braids, Cabal Minion", price: 0.00},
-    { name: "Future Sight", price: 0.00},
-    { name: "Silvos, Rogue Elemental", price: 0.00},
-    { name: "Glare of Subdual", price: 0.00},
-    { name: "Jareth, Leonine Titan",  price: 0.00},
-    { name: "Serendib Efreet", price: 0.00},
-    { name: "Diminishing Returns", price: 0.00},
-    { name: "Void", price: 0.00},
-    { name: "Pyrokinesis", price: 0.00},
-    { name: "Rorix Bladewing", price: 0.00},
-    { name: "Goblin Trenches", price: 0.00},
-    { name: "Call the Skybreaker", price: 0.00},
-    { name: "Giant Solifuge", price: 0.00},
-    { name: "Crater Hellion", price: 0.00}
+<script>
+var raresMM17 = [
+    {name: "Scalding Tarn", price: 56.99},
+    {name: "Verdant Catacombs", price:44.96},
+    {name: "Misty Rainforest", price:32.24},
+    {name: "Arid Mesa", price:30.00},
+    {name: "Marsh Flats", price:29.99},
+    {name: "Blood Moon", price:19.51},
+    {name: "Damnation", price:18.95},
+    {name: "Goblin Guide", price:16.11},
+    {name: "Death's Shadow", price:8.99},
+    {name: "Cyclonic Rift", price:5.95},
+    {name: "Stony Silence", price:5.33},
+    {name: "Gifts Ungiven", price:4.97},
+    {name: "Abrupt Decay", price:4.28},
+    {name: "Grafdigger's Cage", price:3.86},
+    {name: "Basilisk Collar", price:3.75},
+    {name: "Restoration Angel", price:3.18},
+    {name: "Venser, Shaper Savant", price:2.79},
+    {name: "Scavenging Ooze", price:2.61},
+    {name: "Phantasmal Image", price:2.42},
+    {name: "Ranger of Eos", price:1.86},
+    {name: "Thragtusk", price:1.50},
+    {name: "Blade Splicer", price:1.13},
+    {name: "Zur the Enchanter", price:1.02},
+    {name: "Terminus", price:0.99},
+    {name: "Pyromancer Ascension", price:0.98},
+    {name: "Deadeye Navigator", price:0.88},
+    {name: "Primal Command", price:0.81},
+    {name: "Boros Reckoner", price:0.80},
+    {name: "Obzedat, Ghost Council", price:0.66},
+    {name: "Falkenrath Aristocrat", price:0.63},
+    {name: "Desecration Demon", price:0.50},
+    {name: "Wort, the Raidmother", price:0.49},
+    {name: "Niv-Mizzet, Dracogenius", price:0.48},
+    {name: "Stoic Angel", price:0.46},
+    {name: "Summoning Trap", price:0.46},
+    {name: "Zealous Conscripts", price:0.45},
+    {name: "Cruel Ultimatum", price:0.41},
+    {name: "Damping Matrix", price:0.41},
+    {name: "Broodmate Dragon", price:0.41},
+    {name: "Ulvenwald Tracker", price:0.39},
+    {name: "Advent of the Wurm", price:0.39},
+    {name: "Simic Sky Swallower", price:0.39},
+    {name: "Cackling Counterpart", price:0.39},
+    {name: "Call of the Herd", price:0.38},
+    {name: "Hellrider", price:0.38},
+    {name: "Mizzium Mortars", price:0.38},
+    {name: "Evil Twin", price:0.37},
+    {name: "Mind Shatter", price:0.36},
+    {name: "Extractor Demon", price:0.36},
+    {name: "Sever the Bloodline", price:0.35},
+    {name: "Fiery Justice", price:0.35},
+    {name: "Seance", price:0.35},
+    {name: "Aethermage's Touch", price:0.34}
 ];
-var mythic = [
-    { name: "Force of Will", price: 79.99},
-    { name: "Mana Crypt", price: 77.59},
-    { name: "Jace, the Mind Sculptor", price: 63.64},
-    { name: "Vampiric Tutor", price: 42.00},
-    { name: "Karakas", price: 38.45},
-    { name: "Sneak Attack", price: 20.76},
-    { name: "Chrome Mox", price: 15.90},
-    { name: "Natural Order", price: 14.90},
-    { name: "Dack Fayden", price: 13.77},
-    { name: "Maelstrom Wanderer", price: 8.41},
-    { name: "Necropotence", price: 7.70},
-    { name: "Argothian Enchantress", price: 5.14},
-    { name: "Balance", price: 1.79},
-    { name: "Worldgorger Dragon", price: 1.25},
-    { name: "Sphinx of the Steel Wind", price: 1.10}
+
+var mythicMM17 = [
+    {name: "Liliana of the Veil", price: 81.84},
+    {name: "Tarmogoyf", price: 71.12},
+    {name: "Snapcaster Mage", price: 54.93},
+    {name: "Cavern of Souls", price: 50.55},
+    {name: "Linvala, Keeper of Silence", price: 11.94},
+    {name: "Craterhoof Behemoth", price: 11.51},
+    {name: "Voice of Resurgence", price: 11.46},
+    {name: "Olivia Voldaren", price: 7.75},
+    {name: "Griselbrand", price: 6.75},
+    {name: "Temporal Mastery", price: 4.45},
+    {name: "Domri Rade", price: 3.19},
+    {name: "Sphinx's Revelation", price: 3.17},
+    {name: "Bonfire of the Damned", price: 2.97},
+    {name: "Past in Flames", price: 2.50},
+    {name: "Entreat the Angels", price: 2.23}
 ];
-var mythics = 0;
-var pulled = [];
 
-function packCracker() {
-    var rareSlot;
-    var rom = Math.floor(Math.random() * 8);
+var AERrares = [
+    {name: "Walking Ballista", price: 15.08},
+    {name: "Metallic Mimic", price: 13.32},
+    {name: "Disallow", price: 6.34},
+    {name: "Heroic Intervention", price: 4.74},
+    {name: "Baral, Chief of Compliance", price: 4.31},
+    {name: "Spire of Industry", price: 3.20},
+    {name: "Aethersphere Harvester", price: 1.99},
+    {name: "Kari Zev, Skyship Raider", price: 1.50},
+    {name: "Rishkar, Peema Renegade", price: 1.48},
+    {name: "Glint-Sleeve Siphoner", price: 1.30},
+    {name: "Lifecrafter's Bestiary", price: 1.00},
+    {name: "Yahenni, Undying Partisan", price: 1.00},
+    {name: "Yahenni's Expertise", price: 0.92},
+    {name: "Greenbelt Rampager", price: 0.90},
+    {name: "Sram's Expertise", price: 0.75},
+    {name: "Whir of Invention", price: 0.73},
+    {name: "Sram, Senior Edificer", price: 0.71},
+    {name: "Baral's Expertise", price: 0.67},
+    {name: "Inspiring Statuary", price: 0.67},
+    {name: "Rishkar's Expertise", price: 0.62},
+    {name: "Kari Zev's Expertise", price: 0.59},
+    {name: "Dark Intimations", price: 0.49},
+    {name: "Release the Gremlins", price: 0.49},
+    {name: "Scrap Trawler", price: 0.49},
+    {name: "Oath of Ajani", price: 0.49},
+    {name: "Hope of Ghirapur", price: 0.48},
+    {name: "Greenwheel Liberator", price: 0.41},
+    {name: "Pia's Revolution", price: 0.41},
+    {name: "Tezzeret's Betrayal", price: 0.40},
+    {name: "Peacewalker Colossus", price: 0.39},
+    {name: "Battle at the Bridge", price: 0.38},
+    {name: "Aethergeode Miner", price: 0.35},
+    {name: "Solemn Recruit", price: 0.34},
+    {name: "Midnight Entourage", price: 0.33},
+    {name: "Ajani's Aid", price: 0.33},
+    {name: "Quicksmith Rebel", price: 0.30},
+    {name: "Merchant's Dockhand", price: 0.29},
+    {name: "Quicksmith Spy", price: 0.29},
+    {name: "Aethertide Whale", price: 0.29},
+    {name: "Aid from the Cowl", price: 0.29},
+    {name: "Call for Unity", price: 0.29},
+    {name: "Freejam Regent", price: 0.29},
+    {name: "Consulate Crackdown", price: 0.28},
+    {name: "Secret Salvage", price: 0.27}
+];
 
-    if (rom === 7) {
-        rareSlot = mythic[Math.floor(Math.random() * mythic.length)];
-        mythics++;
+var AERmythic=[
+    {name: "Tezzeret the Schemer", price: 9.38},
+    {name: "Heart of Kiran", price: 7.75},
+    {name: "Paradox Engine", price: 6.99},
+    {name: "Ajani, Valiant Protector", price: 4.77},
+    {name: "Tezzeret, Master of Metal", price: 4.34},
+    {name: "Herald of Anguish", price: 4.10},
+    {name: "Mechanized Production", price: 4.00},
+    {name: "Ajani Unyielding", price: 3.28},
+    {name: "Planar Bridge", price: 2.10},
+    {name: "Exquisite Archangel", price: 1.00},
+    {name: "Indomitable Creativity", price: 0.88},
+    {name: "Gonti's Aether Heart", price: 0.84},
+    {name: "Aetherwind Basker", price: 0.79},
+    {name: "Lightning Runner", price: 0.73}
 
-        pulled.push(rareSlot);
+];
+
+var AER = {mythics: AERmythic, rares: AERrares};
+var MM17 ={mythics: mythicMM17, rares: raresMM17};
+var count = 0;
+var mythic = 0;
+var value = 0;
+var average = 0;
+
+function master(set, qty){
+    console.log("Look at me I'm doing stuff!");
+    console.log(set);
+    console.log(qty);
+    switch(set){
+        case "AER":
+            count = 0;
+            mythic=0;
+            crackEm(qty, 36, AER);
+            average = value/(36*qty);
+            // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            // console.log(count);
+            // console.log(mythic);
+            // console.log(average);
+            // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            break;
+        case "MM17":
+            count = 0;
+            mythic=0;
+            crackEm(qty, 24, MM17);
+            average = value/(24*qty);
+            // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            // console.log(count);
+            // console.log(mythic);
+            // console.log(average);
+            // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            break;
+        case "EMA":
+            count = 0;
+            mythic=0;
+            crackEm(qty, 24, set);
+            average = value/(24*qty);
+            // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            // console.log(count);
+            // console.log(mythic);
+            // console.log(average);
+            // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            break;
     }
-    else {
-        rareSlot = rare[Math.floor(Math.random() * rare.length)];
+};
 
-        pulled.push(rareSlot);
-    }
-}
+function crackEm(iter, packNum, set){
+    value = 0;
+    for(var i = 0; i<iter; i++){
+        for(var j = 0; j<packNum; j++){
+            var dieRoll = Math.floor(Math.random()*9);
+            var pulled;
+            switch(dieRoll){
+                case 1:
+                    pulled = set.mythics[Math.floor(Math.random()*set.mythics.length)];
+                    // console.log("**************************");
+                    // console.log("Mythic!!: " + pulled.name);
+                    // console.log("Value: " + pulled.price);
+                    // console.log("**************************");
+//                        var pulledDiv = $("<div>");
+//                        pulledDiv.html+="<h2>Mythic:</h2>";
+//                        pulledDiv.html+="<h3>Name: "+pulled.name+"</h3>";
+//                        pulledDiv.hmtl+="<h3>Value: "+pulled.price+"</h3>";
+                    var html = "<div><h2>Mythic:</h2><h3>Name: "+pulled.name+"</h3><h3>Value: "+pulled.price+"</h3></div>";
+                    var pulledDiv = $(html);
+                    console.log(pulledDiv);
+                    $("#holdMyPulls").append(pulledDiv);
 
-
-function boxCracker(){
-    mythics = 0;
-    for(var i = 0; i<24; i++){
-        packCracker();
-    }
-}
-
-function averages(){
-    var averageM = 0;
-    for(var j = 0; j<1000; j++){
-        boxCracker();
-        averageM=averageM+mythics;
-    }
-
-    var average = Math.floor(averageM/1000);
-
-    console.log("On average you will pull " + average + " Mythic rares");
-
-}
-
-
-function UI() {
-    inquire.prompt([
-        {
-            type: "list",
-            name: "function",
-            message: "Which would you like to simulate?",
-            choices: ["Cracking a pack", "Cracking a box", "Averages for cracking 1000 boxes", "Averages for cracking 1000000 boxes"]
+                    value+=pulled.price;
+                    count++;
+                    mythic++;
+                    break;
+                default:
+                    pulled=set.rares[Math.floor(Math.random()*set.rares.length)];
+                    // console.log("==========================");
+                    // console.log("Rare: " + pulled.name);
+                    // console.log("Value " + pulled.price);
+                    // console.log("==========================");
+//                        var pulledDiv = $("<div>");
+//                        pulledDiv.html+="<h2>Rare:</h2>";
+//                        pulledDiv.html+="<h3>Name: "+pulled.name+"</h3>";
+//                        pulledDiv.hmtl+="<h3>Value: "+pulled.price+"</h3>";
+                    var html = "<div><h2>Rare:</h2><h3>Name: "+pulled.name+"</h3><h3>Value: "+pulled.price+"</h3></div>";
+                    var pulledDiv = $(html);
+                    console.log(pulledDiv);
+                    $("#holdMyPulls").append(pulledDiv);
+                    value +=  pulled.price;
+                    count++;
+                    break;
+            }
         }
-    ]).then(function (results) {
-        switch (results.function) {
-            case "Cracking a pack":
-                packCracker();
-                console.log(pulled);
-                var value = 0;
-                for(var k = 0; k<pulled.length; k++){
-                    value = value+pulled[k].price;
-                }
-                console.log("You pulled $" + value + " of value from this pack");
-                pulled = [];
-                break;
-            case "Cracking a box":
-                boxCracker();
-                console.log(pulled);
-                var value = 0;
-                for(var k = 0; k<pulled.length; k++){
-                    value = value+pulled[k].price;
-                }
-                console.log("You pulled $" + value + " of value from this box");
-                pulled = [];
-                break;
-            case "Averages for cracking 1000 boxes":
-                averages();
-                var value = 0;
-                for(var k = 0; k<pulled.length; k++){
-                    value = value+pulled[k].price;
-                }
-                value = value/1000;
-                console.log("You averaged $" + value + " of value per box");
-                pulled = [];
-                break;
-            case "Averages for cracking 1000000 boxes":
-                for(var l = 0; l<1000; l++){
-                    averages();
-                }
-                var value = 0;
-                for(var k = 0; k<pulled.length; k++){
-                    value = value+pulled[k].price;
-                }
-                value = value/1000000;
-                console.log("You averaged $" + value + " of value per box");
-                pulled = [];
-                break;
-        }
-
-        UI();
-    });
-
-}
-
-UI();
+    }
+};
+</script>
