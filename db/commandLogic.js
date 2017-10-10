@@ -175,7 +175,7 @@ function master(set, qty){
         case "EMA":
             count = 0;
             mythic=0;
-            crackEm(qty, 24, set);
+            crackEm(qty, 24, EMA);
             average = value/(24*qty);
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             // console.log(count);

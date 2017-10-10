@@ -11,13 +11,15 @@ module.exports = function (app) {
   // GET route for getting all info on cards
    // =======================================
    app.get("/api/gets", function (req, res) {
-      res.json(commandLogic.master({}));
+      
       
    });
 
    app.post("/api/posts", function (req, res) {
-      
-   })
+      console.log(req.body);
+      res.json(commandLogic.master(req.body.Set, req.body.Quant));
+
+   });
 
 /*
    // POST route for SEARCH and getting SPECIFIC cards
