@@ -142,6 +142,7 @@
 var mythic = 0;
 var value = 0;
 var average = 0;
+var HTML = [];
 
 var $ = require("jquery");
 var search = require("../lib/search");
@@ -215,7 +216,7 @@ function crackEm(iter, packNum, set) {
                         var html = "<img src="+imgURL+ "></img><h3>Value: " + pulled.price + "</h3></div>";
                         var pulledDiv = $(html);
                         console.log(pulledDiv);
-                        $("#holdMyPulls").append(pulledDiv);
+                        HTML.push(pulledDiv);
                     }
 
                     value += pulled.price;
@@ -237,7 +238,7 @@ function crackEm(iter, packNum, set) {
                         var html = "<img src="+imgURL+ "></img><h3>Value: " + pulled.price + "</h3></div>";
                         var pulledDiv = $(html);
                         console.log(pulledDiv);
-                        $("#holdMyPulls").append(pulledDiv);
+                        HTML.push(pulledDiv);
                     }
 
                     value += pulled.price;
