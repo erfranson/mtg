@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 16830689fdc9e16f7ed8926a172930d5a4d76950
 var raresMM17 = [
     {name: "Scalding Tarn", price: 56.99},
     {name: "Verdant Catacombs", price: 44.96},
@@ -155,7 +159,7 @@ function master(set, qty) {
     console.log(set);
     console.log(qty);
     switch (set) {
-        case "AER":
+        case "Aether Revolt":
 
             mythic = 0;
             crackEm(qty, 36, AER);
@@ -166,7 +170,7 @@ function master(set, qty) {
             // console.log(average);
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
-        case "MM17":
+        case "Modern Masters 2017":
 
             mythic = 0;
             crackEm(qty, 24, MM17);
@@ -177,7 +181,7 @@ function master(set, qty) {
             // console.log(average);
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
-        case "EMA":
+        case "Eternal Masters":
 
             mythic = 0;
             crackEm(qty, 24, set);
@@ -190,6 +194,7 @@ function master(set, qty) {
             break;
     }
     return average;
+
 };
 
 function crackEm(iter, packNum, set) {
@@ -246,4 +251,7 @@ function crackEm(iter, packNum, set) {
     }
 };
 
+
 module.exports = master;
+
+

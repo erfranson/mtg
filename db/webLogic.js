@@ -145,3 +145,5 @@ function crackEm(iter, packNum, set){
 master(input1);
 master(input2);
 master(input3);
+
+module.exports = webLogic;

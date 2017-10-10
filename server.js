@@ -1,7 +1,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
-var search = require("./scrape/static");
+var search = require("./lib/search");
 
 // Sets up the Express App
 // =============================================================
@@ -22,7 +22,7 @@ app.use(express.static("public"));
 
 // Routes
 // =============================================================
-// require('./routes/apiroutes.js')(app);
+require('./routes/apiroutes.js')(app);
 require('./routes/htmlroutes.js')(app);
 
 // Starts the server to begin listening
