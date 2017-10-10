@@ -1,4 +1,4 @@
-<script>
+
 var raresMM17 = [
     {name: "Scalding Tarn", price: 56.99},
     {name: "Verdant Catacombs", price:44.96},
@@ -184,6 +184,11 @@ function master(set, qty){
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
     }
+    return {
+        count: count,
+        mythic: mythic,
+        average: average
+    };
 };
 
 function crackEm(iter, packNum, set){
@@ -233,4 +238,8 @@ function crackEm(iter, packNum, set){
         }
     }
 };
-</script>
+
+module.exports = {
+    master: master,
+    crackEm: crackEm
+};
