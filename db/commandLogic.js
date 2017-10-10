@@ -210,7 +210,7 @@ function crackEm(iter, packNum, set) {
 //                        pulledDiv.html+="<h2>Mythic:</h2>";
 //                        pulledDiv.html+="<h3>Name: "+pulled.name+"</h3>";
 //                        pulledDiv.hmtl+="<h3>Value: "+pulled.price+"</h3>";
-                    if (iter != 1) {
+                    if (iter === 1) {
                         var imgURL = search(set, pulled.name);
                         var html = "<img src="+imgURL+ "></img><h3>Value: " + pulled.price + "</h3></div>";
                         var pulledDiv = $(html);
@@ -232,7 +232,7 @@ function crackEm(iter, packNum, set) {
 //                        pulledDiv.html+="<h2>Rare:</h2>";
 //                        pulledDiv.html+="<h3>Name: "+pulled.name+"</h3>";
 //                        pulledDiv.hmtl+="<h3>Value: "+pulled.price+"</h3>";
-                    if (iter != 1) {
+                    if (iter === 1) {
                         var imgURL = search(set, pulled.name);
                         var html = "<img src="+imgURL+ "></img><h3>Value: " + pulled.price + "</h3></div>";
                         var pulledDiv = $(html);
