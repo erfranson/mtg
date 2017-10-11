@@ -35,7 +35,7 @@ ul.nav.nav-tabs{
 	color: #ffffff;
 }
 .nav-tabs>li{
-	width: 33%;
+	width: 50%;
 	text-align: center;
 }
 .nav-tabs>li>a{
@@ -82,7 +82,26 @@ ul.nav.nav-tabs{
 	margin-top: 10px;
 }
 #info{
-	min-height: 350px;
+	min-height: 400px;
+	background-color: #fff;
+}
+.mtg-art{
+	background: url(../images/mgt-elements.jpg);
+	min-height: 400px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+.mtg-how{
+	font-family: 'Pathway Gothic One', sans-serif;
+}
+.mtg-how ol {
+	
+}
+.mtg-how li {
+   list-style-position: inside;
+   padding-top: 15px;
+   font-size: 20px;
+
 }
 .footer {
   position: absolute;
