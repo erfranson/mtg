@@ -177,19 +177,19 @@ function master(set, qty) {
             // console.log(average);
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
-<<<<<<< HEAD
+
         case "EMA":
             count = 0;
             mythic=0;
             crackEm(qty, 24, EMA);
             average = value/(24*qty);
-=======
+
         case "Eternal Masters":
 
             mythic = 0;
             crackEm(qty, 24, set);
             average = value /qty;
->>>>>>> c0e0cb069a0e389bd21e7b3ab9706a6cf5a3f2bd
+
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             // console.log(count);
             // console.log(mythic);
@@ -197,7 +197,12 @@ function master(set, qty) {
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
     }
-    return average;
+    return {
+        average: average,
+        mythic: mythic,
+        count: count,
+        cardHtml: cardHtml
+    };
 
 };
 
