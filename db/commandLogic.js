@@ -190,7 +190,8 @@ function master(set, qty) {
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
     }
-    return average;
+    HTML.push(average);
+    return HTML;
 
 };
 
