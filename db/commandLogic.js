@@ -200,8 +200,6 @@ function master(set, qty) {
     return {
         average: average,
         mythic: mythic,
-        count: count,
-        cardHtml: cardHtml
     };
 
 };
@@ -261,6 +259,9 @@ function crackEm(iter, packNum, set) {
 };
 
 
-module.exports = master;
+module.exports = {
+    master: master,
+    crackEm: crackEm
+}
 
 
