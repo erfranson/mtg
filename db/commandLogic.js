@@ -178,11 +178,19 @@ function master(set, qty) {
             // console.log(average);
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
+
+        case "EMA":
+            count = 0;
+            mythic=0;
+            crackEm(qty, 24, EMA);
+            average = value/(24*qty);
+
         case "Eternal Masters":
 
             mythic = 0;
             crackEm(qty, 24, set);
             average = value /qty;
+
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             // console.log(count);
             // console.log(mythic);
@@ -190,8 +198,10 @@ function master(set, qty) {
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
     }
+
     HTML.push(average);
     return HTML;
+
 
 };
 
@@ -250,6 +260,9 @@ function crackEm(iter, packNum, set) {
 };
 
 
-module.exports = master;
+module.exports = {
+    master: master,
+    crackEm: crackEm
+}
 
 
