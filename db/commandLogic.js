@@ -142,6 +142,7 @@
 var mythic = 0;
 var value = 0;
 var average = 0;
+var HTML = [];
 
 var $ = require("jquery");
 var search = require("../lib/search");
@@ -197,10 +198,10 @@ function master(set, qty) {
             // console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             break;
     }
-    return {
-        average: average,
-        mythic: mythic,
-    };
+
+    HTML.push(average);
+    return HTML;
+
 
 };
 
@@ -221,12 +222,12 @@ function crackEm(iter, packNum, set) {
 //                        pulledDiv.html+="<h2>Mythic:</h2>";
 //                        pulledDiv.html+="<h3>Name: "+pulled.name+"</h3>";
 //                        pulledDiv.hmtl+="<h3>Value: "+pulled.price+"</h3>";
-                    if (iter != 1) {
+                    if (iter === 1) {
                         var imgURL = search(set, pulled.name);
                         var html = "<img src="+imgURL+ "></img><h3>Value: " + pulled.price + "</h3></div>";
                         var pulledDiv = $(html);
                         console.log(pulledDiv);
-                        $("#holdMyPulls").append(pulledDiv);
+                        HTML.push(pulledDiv);
                     }
 
                     value += pulled.price;
@@ -243,12 +244,12 @@ function crackEm(iter, packNum, set) {
 //                        pulledDiv.html+="<h2>Rare:</h2>";
 //                        pulledDiv.html+="<h3>Name: "+pulled.name+"</h3>";
 //                        pulledDiv.hmtl+="<h3>Value: "+pulled.price+"</h3>";
-                    if (iter != 1) {
+                    if (iter === 1) {
                         var imgURL = search(set, pulled.name);
                         var html = "<img src="+imgURL+ "></img><h3>Value: " + pulled.price + "</h3></div>";
                         var pulledDiv = $(html);
                         console.log(pulledDiv);
-                        $("#holdMyPulls").append(pulledDiv);
+                        HTML.push(pulledDiv);
                     }
 
                     value += pulled.price;
