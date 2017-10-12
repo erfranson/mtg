@@ -27,6 +27,7 @@ module.exports = function (app) {
    // POST route boyzzzz
    // ==================
    app.post("/api/posts", function (req, res) {
+   	  console.log('post body below this')
       console.log(req.body);
       res.json(commandLogic.master(req.body.Set, req.body.Quant));
 

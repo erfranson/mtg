@@ -111,21 +111,36 @@
 
         values = {
 
-            Set: set,
-            Quant: quant 
+            "Set": set,
+            "Quant": quant 
 
         }
-
+        console.log(values)
         $.ajax({
       url: "api/posts",
       method: "POST",
-      body: values
+      data: values
     }).done(function(response) {
-        console.log(response.res);
+        console.log(response);
 
 });
     console.log(values);
       });
+
+//       $(".card-submit").on("click", function(event) {
+//   event.preventDefault();
+
+//   // Make a newSearch object
+//   var newSearch = {
+//     set_name: $(".set").val().trim(),
+//     quantity: $(".quant").val().trim(),
+//   };
+
+//   console.log(newSearch);
+//   $.post("/api/new", newSearch)
+   
+   
+// });
   </script>
 </body>
 </html>
